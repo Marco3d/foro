@@ -13,3 +13,4 @@ class ExampleTest extends FeatureTestCase
             ->see('Marco Perafan')
             ->see('admin@digitaldatos.net');
     }
+}
