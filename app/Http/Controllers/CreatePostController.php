@@ -12,10 +12,13 @@ class CreatePostController extends Controller
         return view('posts.create');
     }
     public function store(Request $request)
-    {
-        
-        $post = new Post($request->all());
-        auth()->user()->posts()->save($post);
-        return $post->title;
-    }
+        {
+            $this->validate($request, [
+                'title' => 'required',
+                'content' => 'required'
+            ]);
+            $post = new Post($request->all());
+            auth()->user()->posts()->save($post);
+            return "Post: ".$post->title;
+        }
 }
