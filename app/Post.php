@@ -15,6 +15,11 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class); // un  post va a tener  muchos comentarios
+    }
+
      public function setTitleAttribute($value)
     {
         $this->attributes['title'] = $value;

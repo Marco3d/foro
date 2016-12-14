@@ -7,14 +7,11 @@ class ShowPostTest extends FeatureTestCase
         $user = $this->defaultUser([
             'name' => 'Duilio Palacios',
         ]);
-
         $post = $this->createPost([
             'title' => 'Este es el titulo del post',
             'content' => 'Este es el contenido del post',
             'user_id' => $user->id,
         ]);
-
-        /*dd(\App\User::all()->toArray());*/
         // When
         $this->visit($post->url)
             ->seeInElement('h1', $post->title)
