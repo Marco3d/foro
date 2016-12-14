@@ -1,18 +1,28 @@
 <?php
+use App\Post;
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-
 class PostIntegrationTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
+    use DatabaseTransactions;
+    function test_a_slug_is_generated_and_saved_to_the_database()
     {
-        $this->assertTrue(true);
+       
+        $post = $this->createPost([
+            'title' => 'Como instalar Laravel',
+        ]);
+
+        /*dd($post->toArray());*/
+        
+        $this->assertSame(
+            'como-instalar-laravel',
+            $post->fresh()->slug
+        );
+        /*
+                $this->seeInDatabase('posts', [
+                    'slug' => 'como-instalar-laravel'
+                ]);
+                $this->assertSame('como-instalar-laravel', $post->slug);
+        */
     }
 }
